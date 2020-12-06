@@ -9,4 +9,13 @@ length = len(raw)
 for i in range(length):
     raw[i] = raw[i].replace("\n", "")
 
-print(bb)
+
+count = 0
+
+for x in range(length):
+    c = ""
+    for y in range(len(raw[x])):
+        if raw[x][y] not in c: c = c + raw[x][y]
+    count += len(c)
+
+print(count)
