@@ -15,8 +15,14 @@ for i in range(length):
 
 bags = {}
 
-for i in range(length):
-    if raw[i][1] == "none": bags[raw[i][0]] = "none"
-    else: 
-        bags[raw[i][0]] = {}
+for x in range(length):
+    if raw[x][1] == "none": bags[raw[x][0]] = "none"
+    else:
+        num = []
+        bag = []
+        for y in range(len(raw[x][1])): num.append(raw[x][1][y][0])
+        for y in range(len(raw[x][1])): bag.append(raw[x][1][y][2:])
+        bags[raw[x][0]] = {}
+        for y in range(len(raw[x][1])): bags[raw[x][0]][bag[y]] = num[y]
+
 print(bb)
