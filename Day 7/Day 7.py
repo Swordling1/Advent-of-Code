@@ -13,16 +13,18 @@ for i in range(length):
     if "no other" in raw[i][1]: raw[i][1] = "none"
     else: raw[i][1] = raw[i][1].split(", ")
 
-bags = {}
+bags = []
+info = []
+
+CLASS = type(bags)
 
 for x in range(length):
-    if raw[x][1] == "none": bags[raw[x][0]] = "none"
-    else:
-        num = []
-        bag = []
-        for y in range(len(raw[x][1])): num.append(raw[x][1][y][0])
-        for y in range(len(raw[x][1])): bag.append(raw[x][1][y][2:])
-        bags[raw[x][0]] = {}
-        for y in range(len(raw[x][1])): bags[raw[x][0]][bag[y]] = num[y]
+    bags.append(raw[x][0])
+    if type(raw[x][1]) == CLASS: 
+        info.append(raw[x][1])
+        for y in range(len(info[x])):
+            num = info[x][y][0]
+            bag = info[x][y][2:]
 
-print(bb)
+            info[x][y] = [info[x][y][0], info[x][y][2:]]
+    else: info.append("none")
