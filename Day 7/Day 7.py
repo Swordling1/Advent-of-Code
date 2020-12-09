@@ -1,7 +1,7 @@
 from pathlib import Path
 
-raw = Path('Day 7\input.txt').read_text()
-#raw = Path('Day 7\\test.txt').read_text()
+#raw = Path('Day 7\input.txt').read_text()
+raw = Path('Day 7\\test.txt').read_text()
 raw = raw.strip()
 raw = raw.split("\n")
 
@@ -41,25 +41,17 @@ while len(needed) > 0:
     needed = new
 print(count)
 
-check = ["shiny gold bags"]
-total = []
+def check_bags(bag):
+    tag = bags.index(bag)
+    if type(info[tag]) == CLASS:
+        c = 0
+        for i in range(len(info[tag])):
+            start = c
+            c += info[tag][i][0] * check_bags(info[tag][i][1])
+            print(bag + ": start = " + str(start) + info[tag][i][1] + "\n" + str(info[tag][i][0]) + " * " + str(check_bags(info[tag][i][1])) + "\nc = " + str(c))
+        return(c)
+    else:
+        return(1)
 
-while len(check) > 0:
-    new = []
-    c = 0
-    for z in range(len(check)):
-        for x in range(length):
-            if type(info[x]) == CLASS:
-                for y in range(len(info[x])): 
-                    if info[x][y][1] == check[z]:
-                        new.append(bags[x])
-    new2 = []
-    for i in range(len(new)):
-        if new[i] not in new2:
-            new2.append(new[i])
-    for i in range(len(new)):
-        if new[i] not in total:
-            total.append(new[i])
-    check = new2
-
-print(len(total))
+print(check_bags("shiny gold bags"))
+print(bb)
