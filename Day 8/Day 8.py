@@ -1,4 +1,5 @@
 from pathlib import Path
+import copy
 
 raw = Path('Day 8\input.txt').read_text()
 #raw = Path('Day 8\\test.txt').read_text()
@@ -32,30 +33,39 @@ while True:
 
 print(acc)
 
-latest = 0
-for i in range(length):
-    if i > latest and raw[i][2]: latest = i
-
 for i in range(length):
     raw[i][2] = False
 
+acc = []
+for x in range(length):
+    special = copy.deepcopy(raw)
+    worked = True
+    acc_l = 0
+    i = 0
 
-acc = 0
-i = 0
+    for o in range(length):
+        special[o][2] = False
+    
+    if special[x][0] == "nop": special[x][0] = "jmp"
+    elif special[x][0] == "jmp": special[x][0] = "nop"
 
-while i < length:
-    if raw[i][2]: 
-        print('ERROR IN LOOP!!!')
-        break
-    if raw[i][0] == "nop": 
-        raw[i][2] = True
-        i += 1
-    elif raw[i][0] == "acc":
-        acc += raw[i][1]
-        raw[i][2] = True
-        i += 1
-    elif raw[i][0] == "jmp":
-        raw[i][2] = True
-        i += raw[i][1]
+    while worked:
+        if special[i][2]: 
+            worked = False
+        if special[i][0] == "nop": 
+            special[i][2] = True
+            i += 1
+        elif special[i][0] == "acc":
+            acc_l += special[i][1]
+            special[i][2] = True
+            i += 1
+        elif special[i][0] == "jmp":
+            special[i][2] = True
+            i += special[i][1]
+        if i >= length:
+            break
+    if worked:
+        acc.append(acc_l)
+
 
 print(acc)
