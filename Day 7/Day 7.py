@@ -54,4 +54,3 @@ def check_bags(bag):
         return(1)
 
 print(check_bags("shiny gold bags"))
-print(bb)
