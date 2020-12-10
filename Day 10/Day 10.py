@@ -1,8 +1,8 @@
 from pathlib import Path
 import copy
 
-raw = Path('Day 10\input.txt').read_text()
-#raw = Path('Day 10\\test.txt').read_text()
+#raw = Path('Day 10\input.txt').read_text()
+raw = Path('Day 10\\test.txt').read_text()
 raw = raw.strip()
 raw = raw.split("\n")
 
@@ -16,16 +16,18 @@ num = 0
 jolt1 = 0
 jolt3 = 0
 
+new = [0]
 for i in range(length):
     if list[i] == num + 3:
         jolt3 += 1
         num = list[i]
-    if list[i] == num + 1:
+    elif list[i] == num + 1:
         jolt1 += 1
         num = list[i]
+    if num not in new: new.append(num)
 jolt3 += 1
-
-print(num + 3)
-print(jolt1)
-print(jolt3)
+laptop = num + 3
+new.append(laptop)
 print(jolt1 * jolt3)
+ara = [new]
+print(bb)
