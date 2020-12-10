@@ -7,19 +7,37 @@ raw = raw.strip()
 raw = raw.split("\n")
 
 length = len(raw)
-start = 25
+START = 25
 
 list = []
 for i in range(length): list.append(int(raw[i]))
 
 invalid = 0
-for i in range(start, length):
+for i in range(START, length):
     o = i + 1
-    num = list[i - start:i]
+    num = list[i - START:i]
     valid = False
-    for x in range(start):
-        for y in range(start):
+    for x in range(START):
+        for y in range(START):
             if num[x] + num[y] == list[i]: valid = True
     if valid == False: invalid = list[i]
 
 print(invalid)
+
+for x in range(length):
+    found = False
+    num = []
+    total = 0
+    y = x
+    while total <= invalid:
+        if total < invalid:
+            num.append(list[y])
+            total += num[-1]
+            y += 1
+        if total == invalid:
+            found = True
+            break
+    if found:
+        num.sort()
+        print(num[0] + num[-1])
+        break
