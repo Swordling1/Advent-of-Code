@@ -58,3 +58,4 @@ for x in range(len(fields)):
     placement.append([fields[x][0]])
     if len(potential) > 1: placement[x].append(potential)
     else: placement[x].append(potential[0])
+    del place, place_n, potential
